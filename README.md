@@ -134,6 +134,10 @@ This is a common-random-number coupling, **not a claim that model and environmen
 - Development power analysis completed at \(k=16\). CSR did not beat the required baselines: state-feature and one-step-error baselines were stronger in all three regimes, and the required seed count was unbounded for those comparisons. The pre-registered thesis is rejected; no confirmatory run is planned.
 - The DYNA teaching application and unrelated materials are not part of this repository.
 
+## Visual result showcase
+
+The `showcase/` directory contains an interactive negative-result report, an eight-page PDF, standalone SVG figures, and a captioned 60-second explainer video. See `showcase/README.md` for open/rebuild instructions and verification results.
+
 ## Research documents
 
 - [Research plan v0.1](docs/COUNTERWORLD_RESEARCH_PLAN.md)

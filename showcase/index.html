@@ -1,0 +1,175 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="theme-color" content="#f6eddd">
+  <meta name="description" content="A visual explanation of the Counterworld negative result: why Candidate-Set Regret lost to simpler collision-risk baselines.">
+  <title>When the Map Is Wrong — Counterworld</title>
+  <link rel="icon" type="image/svg+xml" href="favicon.svg">
+  <link rel="stylesheet" href="assets/style.css">
+  <script src="assets/evidence.js" defer></script>
+  <script src="assets/app.js" defer></script>
+</head>
+<body>
+  <a class="skip-link" href="#verdict">Skip to the verdict</a>
+  <header class="hero">
+    <div class="hero-topline">
+      <span class="brand-mark" aria-hidden="true">D</span>
+      <span>COUNTERWORLD / VISUAL RESEARCH REPORT</span>
+      <span class="status-pill">DEVELOPMENT-ONLY</span>
+    </div>
+    <div class="hero-grid">
+      <div class="hero-copy">
+        <p class="eyebrow">A BEAUTIFUL NEGATIVE RESULT</p>
+        <h1>When the map is wrong,<br><em>the better warning sign lost.</em></h1>
+        <p class="hero-lead">A story about a robot, a missing wall, and a metric that looked smarter than the evidence allowed.</p>
+        <div class="hero-actions">
+          <button class="primary-button" id="play-video" type="button">Play the 60-second explainer <span aria-hidden="true">▶</span></button>
+          <a class="secondary-button" href="#verdict">Read the result <span aria-hidden="true">↓</span></a>
+          <button class="quiet-button" id="print-report" type="button">Print / PDF</button>
+        </div>
+      </div>
+      <aside class="verdict-hero" aria-label="Research verdict">
+        <span class="verdict-kicker">THE VERDICT</span>
+        <strong>Thesis rejected.</strong>
+        <p>Candidate-Set Regret did not outperform the required collision-risk baselines.</p>
+        <div class="verdict-numbers">
+          <div><span>CSR / R0</span><b>0.504</b></div>
+          <div><span>CSR / R1</span><b>−0.470</b></div>
+          <div><span>CSR / R2</span><b>−0.307</b></div>
+        </div>
+        <p class="small-note">Required N: <b>∞</b> for the key comparisons. No confirmatory run.</p>
+      </aside>
+    </div>
+  </header>
+
+  <nav class="chapter-nav" aria-label="Report chapters">
+    <a href="#story">01 / The wall</a>
+    <a href="#target">02 / The target</a>
+    <a href="#reliability">03 / Reliability</a>
+    <a href="#results">04 / The tournament</a>
+    <a href="#trajectory">05 / The trajectory</a>
+    <a href="#verdict">06 / The verdict</a>
+  </nav>
+
+  <main>
+    <section class="chapter" id="story">
+      <div class="chapter-heading"><span class="chapter-number">01</span><div><p class="eyebrow">THE SETUP</p><h2>The robot and the missing wall</h2></div></div>
+      <div class="two-column">
+        <div class="prose">
+          <p class="lead-paragraph">Imagine a robot trying to reach a goal. Its mental map is missing a wall that exists in the real world.</p>
+          <p>We are not trying to prove that a missing wall is dangerous. We already know the model is wrong. The real question is subtler: <strong>can regret tell us where the danger is, better than simpler measurements?</strong></p>
+          <details class="plain-box"><summary>What is Candidate-Set Regret?</summary><p>It is the return lost by following the model’s controller instead of a true-environment reference controller using the same candidate action sequences. It is not a global optimality guarantee.</p></details>
+        </div>
+        <figure class="figure-card"><img src="figures/missing-wall.svg" alt="Diagram comparing the wall-deleted model map with the true wall and gap, with an agent and goal"></figure>
+      </div>
+    </section>
+
+    <section class="chapter" id="target">
+      <div class="chapter-heading"><span class="chapter-number">02</span><div><p class="eyebrow">THE TARGET</p><h2>First, we had to fix a broken experiment.</h2></div></div>
+      <p class="lead-paragraph">If every checkpoint is safe, there is no risk to rank. The original R0 design produced exactly that: <strong>768 checkpoints, zero collisions, zero variance.</strong></p>
+      <div class="two-column target-grid">
+        <figure class="figure-card"><img src="figures/collision-distribution.svg" alt="Collision probability histograms showing the original R0 target had no variation, while the amended target has a broad distribution"></figure>
+        <div class="gate-panel">
+          <h3>Amended R0 passed every gate</h3>
+          <dl class="gate-list">
+            <div><dt>Variance</dt><dd><strong>0.163</strong><span>≥ 0.02</span></dd></div>
+            <div><dt>Interior band</dt><dd><strong>34.2%</strong><span>≥ 20%</span></dd></div>
+            <div><dt>Exact endpoints</dt><dd><strong>58.3%</strong><span>≤ 70%</span></dd></div>
+            <div><dt>Split-half reliability</dt><dd><strong>0.9924</strong><span>≥ 0.75</span></dd></div>
+          </dl>
+          <p class="small-note">Randomized goals and broader speeds produced safe, risky, and uncertain checkpoints. R1 and R2 also passed with reliability above 0.95.</p>
+        </div>
+      </div>
+    </section>
+
+    <section class="chapter" id="reliability">
+      <div class="chapter-heading"><span class="chapter-number">03</span><div><p class="eyebrow">RELIABILITY</p><h2>We checked the measurements before trusting them.</h2></div></div>
+      <p class="lead-paragraph">More episodes usually mean more stable estimates, but compute is not free. We swept \(k=\{4,8,16,32\}\) and chose the smallest budget that cleared the reliability gate in every regime.</p>
+      <figure class="figure-card wide-figure"><img src="figures/reliability.svg" alt="Line charts of CSR, held-out return, and PEG split-half reliability at k equals 4, 8, 16, and 32, with k equals 16 selected"></figure>
+      <div class="selection-banner"><span class="selection-dot"></span><strong>Selected \(k=16\)</strong><span>smallest budget with CSR and held-out-return reliability above 0.80 in every regime</span></div>
+    </section>
+
+    <section class="chapter" id="results">
+      <div class="chapter-heading"><span class="chapter-number">04</span><div><p class="eyebrow">THE TOURNAMENT</p><h2>The metric that looked smarter lost.</h2></div></div>
+      <p class="lead-paragraph">Each score ranks checkpoints by predicted collision risk. We compare its Spearman correlation with independently estimated collision probability. <strong>Higher is better.</strong></p>
+      <div class="regime-control" role="group" aria-label="Choose a regime">
+        <span>Regime</span>
+        <button type="button" class="is-active" data-regime="R0" aria-pressed="true">R0 · nominal</button>
+        <button type="button" data-regime="R1" aria-pressed="false">R1 · high speed</button>
+        <button type="button" data-regime="R2" aria-pressed="false">R2 · doubled noise</button>
+      </div>
+      <figure class="figure-card wide-figure"><img id="spearman-figure" src="figures/spearman-R0.svg" alt="Grouped bars comparing five collision-risk scores in R0"></figure>
+      <div class="table-wrap">
+        <table id="metric-table">
+          <caption class="sr-only">Spearman correlations for all metrics in the selected regime</caption>
+          <thead><tr><th scope="col">Score</th><th scope="col">Spearman ρ</th><th scope="col">Required N</th><th scope="col">Within cap?</th></tr></thead>
+          <tbody></tbody>
+        </table>
+      </div>
+      <p class="small-note">The state-feature baseline is fitted on development seeds only. It uses geometry, gap, velocity, and noise—not model predictions.</p>
+    </section>
+
+    <section class="chapter" id="trajectory">
+      <div class="chapter-heading"><span class="chapter-number">05</span><div><p class="eyebrow">THE TRAJECTORY</p><h2>One real trajectory, not a stylized success.</h2></div></div>
+      <div class="trajectory-layout">
+        <div class="trajectory-stage">
+          <canvas id="trajectory-canvas" width="960" height="520" aria-label="Animated model and reference trajectories for the selected checkpoint"></canvas>
+          <div class="trajectory-controls">
+            <button class="secondary-button" id="trajectory-play" type="button">Pause</button>
+            <button class="quiet-button" id="trajectory-restart" type="button">Restart</button>
+            <label for="trajectory-speed">Speed <input id="trajectory-speed" type="range" min="0.5" max="2" value="1" step="0.25"></label>
+            <output id="trajectory-speed-value" for="trajectory-speed">1×</output>
+          </div>
+        </div>
+        <aside class="trajectory-notes">
+          <h3>Why this checkpoint?</h3>
+          <p id="selection-rule"></p>
+          <div class="selection-facts" id="selection-facts"></div>
+          <details><summary>What do the colors mean?</summary><ul><li><strong>Rust:</strong> model execution in imagination</li><li><strong>Teal:</strong> model execution in the true environment</li><li><strong>Navy:</strong> candidate-set reference in the true environment</li></ul></details>
+          <details><summary>Read the raw trajectory</summary><pre id="trajectory-raw"></pre></details>
+        </aside>
+      </div>
+      <figure class="figure-card wide-figure"><img src="figures/trajectory.svg" alt="Static diagram of the actual model, imagined model, and reference trajectories"></figure>
+    </section>
+
+    <section class="chapter verdict-section" id="verdict">
+      <div class="chapter-heading"><span class="chapter-number">06</span><div><p class="eyebrow">THE VERDICT</p><h2>A useful negative.</h2></div></div>
+      <div class="verdict-layout">
+        <div class="verdict-statement">
+          <p class="lead-paragraph">CSR did not beat every required baseline in even one regime. The required sample size for the key comparisons was unbounded, so the pre-registered kill rule was triggered.</p>
+          <p><strong>No confirmatory experiment will run.</strong> This does not prove CSR is useless everywhere. It shows that in this deleted-wall testbed, geometry and one-step error provide much better collision-risk predictions.</p>
+        </div>
+        <figure class="figure-card"><img src="figures/required-n.svg" alt="Required sample sizes by regime and baseline, including infinity for the key comparisons"></figure>
+      </div>
+      <div class="takeaways">
+        <article><span>01</span><h3>Negative is informative</h3><p>A pre-registered rejection is evidence, not a failed project.</p></article>
+        <article><span>02</span><h3>Do not tune until it wins</h3><p>Increasing seeds or redesigning until CSR looks better would undermine the protocol.</p></article>
+        <article><span>03</span><h3>Preserve the evidence</h3><p>Raw JSONL, manifests, hashes, trajectory records, and analysis remain available for review.</p></article>
+      </div>
+    </section>
+
+    <section class="chapter provenance" aria-labelledby="provenance-title">
+      <p class="eyebrow">PROVENANCE & REPRODUCIBILITY</p>
+      <h2 id="provenance-title">Every number has a source.</h2>
+      <div class="provenance-grid">
+        <div><h3>Source artifact hashes</h3><dl id="source-hashes"></dl></div>
+        <div><h3>Reproduce the analysis</h3><div class="command-box"><code id="reproduction-command">PYTHONPATH=src python -m counterworld.pilot --stage power --output artifacts/development-power-r0-broadened-k16 --primary-k 16 --workers 8 --random-goals --r0-speed-range 0.75 1.5</code><button class="quiet-button" id="copy-command" type="button">Copy command</button></div><p class="small-note">Run from the <code>research/</code> directory with Python 3.11+ and NumPy 2.x. Artifacts remain development-only.</p></div>
+      </div>
+    </section>
+  </main>
+
+  <footer class="site-footer"><span>COUNTERWORLD / VISUAL RESEARCH REPORT</span><span>Not a general proof about world models.</span></footer>
+
+  <dialog id="video-dialog" aria-labelledby="video-title">
+    <div class="dialog-topline"><h2 id="video-title">When the map is wrong</h2><button class="icon-button" id="close-video" type="button" aria-label="Close video">×</button></div>
+    <video id="explainer-video" controls playsinline preload="metadata" poster="video/poster.png" aria-label="Counterworld explainer video with captions">
+      <source src="video/counterworld-explainer.mp4" type="video/mp4">
+      <track kind="captions" src="video/captions.vtt" srclang="en" label="English" default>
+      Your browser does not support the video element. <a href="video/transcript.md">Read the transcript instead</a>.
+    </video>
+    <div class="dialog-footer"><span>60 seconds · captioned</span><a href="video/transcript.md">Read transcript</a></div>
+  </dialog>
+</body>
+</html>

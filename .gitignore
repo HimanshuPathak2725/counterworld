@@ -1,8 +1,12 @@
 __pycache__/
 *.py[cod]
+node_modules/
+package-lock.json
 .pytest_cache/
 .venv/
 build/
 dist/
 *.egg-info/
 artifacts/
+.tmp/
+showcase/video/frames/

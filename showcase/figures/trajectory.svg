@@ -1,0 +1,15 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1000 520" role="img" aria-labelledby="title desc">
+  <title id="title">Actual and imagined trajectories</title><desc id="desc">Actual model, imagined model, and reference trajectories for the selected checkpoint</desc>
+  <rect width="100%" height="100%" fill="#f6eddd"/>
+  <style>
+    text { font-family: Barlow, 'DejaVu Sans', sans-serif; fill: #18213d; }
+    .title { font-size: 26px; font-weight: 700; }
+    .subtitle { font-size: 14px; fill: #696d74; }
+    .label { font-size: 12px; }
+    .small { font-size: 10px; fill: #696d74; }
+    .mono { font-family: 'JetBrains Mono', 'DejaVu Sans Mono', monospace; }
+    .axis { stroke: #cec0ad; stroke-width: 1; }
+    .grid { stroke: #cec0ad; stroke-width: 1; stroke-dasharray: 3 6; opacity: .65; }
+  </style>
+  <text x="48" y="44" class="title" text-anchor="start" >A real trajectory, not a stylized success</text><text x="48" y="70" class="subtitle" text-anchor="start" >Checkpoint 1020 · actual model execution in the true environment</text><line x1="120" y1="400" x2="900" y2="400" class="grid" /><path d="M866.27,169.94 L870.84,186.77 L863.17,218.42 L843.44,264.45 L812.12,311.51 L767.93,327.26 L711.37,313.97 L642.63,284.62 L561.42,254.72 L467.78,240.46 L361.64,243.09 L243.2,246.75 L112.58,248.99" fill="none" stroke="#c0652d" stroke-width="3" stroke-linecap="round" stroke-linejoin="round" /><circle cx="866.27" cy="169.94" r="7" fill="#c0652d"/><circle cx="112.58" cy="248.99" r="7" fill="#c0652d"/><path d="M866.27,169.94 L870.8,186.76 L863.12,218.54 L843.38,264.66 L811.99,311.96 L767.79,327.85 L711.19,314.68 L642.59,285.29 L561.48,255.28 L467.91,240.87 L361.71,243.43 L243.01,246.87 L112.22,248.87" fill="none" stroke="#1aa3a1" stroke-width="3" stroke-linecap="round" stroke-linejoin="round" /><circle cx="866.27" cy="169.94" r="7" fill="#1aa3a1"/><circle cx="112.22" cy="248.87" r="7" fill="#1aa3a1"/><path d="M866.27,169.94 L870.8,186.76 L863.12,233.51 L843.38,279.63 L811.99,296.99 L767.79,312.88 L711.19,329.65 L642.59,345.16 L561.48,360.06 L467.91,345.66 L361.71,318.28 L243.01,306.74 L112.22,308.74" fill="none" stroke="#18213d" stroke-width="3" stroke-linecap="round" stroke-linejoin="round" /><circle cx="866.27" cy="169.94" r="7" fill="#18213d"/><circle cx="112.22" cy="308.74" r="7" fill="#18213d"/><text x="110" y="450" class="small" text-anchor="start" >start</text><rect x="720" y="405" width="16" height="16" fill="#c0652d" /><text x="744" y="418" class="label" text-anchor="start" >Imagined</text><rect x="835" y="405" width="16" height="16" fill="#1aa3a1" /><text x="859" y="418" class="label" text-anchor="start" >Actual</text><rect x="720" y="445" width="16" height="16" fill="#18213d" /><text x="744" y="458" class="label" text-anchor="start" >Reference</text>
+</svg>
