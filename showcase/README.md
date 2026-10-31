@@ -19,9 +19,19 @@ This is a development-only, evidence-backed presentation of a **negative researc
 
 The video is silent by design and includes on-screen text and captions.
 
-## Open the report
+## Public access
 
-From this directory:
+The complete presentation is available publicly at [HimanshuPathak2725/counterworld](https://github.com/HimanshuPathak2725/counterworld). Anyone with the link can review the thesis result without an interactive deployment:
+
+- Open `report.pdf` for the printable report.
+- Open `video/counterworld-explainer.mp4` for the explainer video.
+- Open `figures/` for the diagrams.
+- Open `assets/evidence.json` for the evidence bundle and actual trajectories.
+- Open `video/captions.vtt` or `video/transcript.md` for accessible text alternatives.
+
+## Open the interactive report locally
+
+The optional interactive report can be served from this directory:
 
 ```bash
 python -m http.server 4180

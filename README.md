@@ -6,6 +6,8 @@ The current testbed is an explicit-state, explicit-noise double integrator with 
 
 **This is not a production RL framework or a confirmatory result.** There is no server, UI, sandbox, Hugging Face adapter, neural model, or claim of robot safety.
 
+This repository is **public**. The negative-result presentation is available directly on GitHub as a [PDF report](showcase/report.pdf), a [60-second explainer video](showcase/video/counterworld-explainer.mp4), [captions](showcase/video/captions.vtt), a [transcript](showcase/video/transcript.md), [SVG diagrams](showcase/figures/), and an [immutable evidence bundle](showcase/assets/evidence.json). **No interactive deployment is required to review the thesis experiment.** An optional interactive report is included for local use.
+
 ## What is implemented
 
 - Deterministic named random streams and canonical Gaussian noise coupling
