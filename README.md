@@ -131,7 +131,7 @@ This is a common-random-number coupling, **not a claim that model and environmen
 - The original R0 target was empirically degenerate: all development checkpoints had collision probability zero.
 - The amended R0 design randomizes goal height and broadens wall-directed speed. The amended R0, R1, and R2 targets pass the registered variance, endpoint, interior-support, and reliability gates.
 - All four required development seeds for the nested paid-score sweep are complete.
-- Power analysis and confirmatory execution are intentionally pending.
+- Development power analysis completed at \(k=16\). CSR did not beat the required baselines: state-feature and one-step-error baselines were stronger in all three regimes, and the required seed count was unbounded for those comparisons. The pre-registered thesis is rejected; no confirmatory run is planned.
 - The DYNA teaching application and unrelated materials are not part of this repository.
 
 ## Research documents
